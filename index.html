@@ -291,11 +291,25 @@
                 align-items: center !important;
             }
         }
+
+        #paradox-msg-box {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            text-align: center;
+            color: var(--green);
+            font-family: 'Bebas Neue', cursive;
+            font-size: 4vh;
+            padding: 2vh;
+            text-shadow: 0 0 1.5vh var(--green);
+        }
     </style>
 </head>
 <body oncontextmenu="return false" oncopy="return false" oncut="return false">
 
-<div id="version-tag">0.5 Version</div>
+<div id="version-tag">1.3 Version</div>
 <div id="flash-overlay"></div>
 
 <div id="sound-control">
@@ -330,7 +344,7 @@
 <div class="game-container">
     <div id="setup">
         <div class="setup-box-container">
-            <img src="귀여운고양이도트4.jpg" class="setup-cat">
+            <img src="Neon cat.gif" class="setup-cat">
         </div>
         <button onclick="_0x1d2e()" class="tutorial-btn">How to Play</button>
         <button onclick="_0x4c5b()" class="setup-btn">Start Single Mode</button>
@@ -343,18 +357,21 @@
 
     <div style="display: flex; flex-wrap: wrap; gap: 3vh; justify-content: center; width: 100%;">
         <div id="game-box">
-            <div class="status" id="status">준비 완료</div>
-            <div id="log-window"></div>
-            <div class="input-view" id="display">---</div>
-            <div class="keypad" id="main-keypad">
-                <button class="key-btn" data-key="7" onclick="_0x9b8a('7')">7</button><button class="key-btn" data-key="8" onclick="_0x9b8a('8')">8</button><button class="key-btn" data-key="9" onclick="_0x9b8a('9')">9</button>
-                <button id="obs-btn" class="btn-obs" onclick="_0x2f1e()">OBS</button>
-                <button class="key-btn" data-key="4" onclick="_0x9b8a('4')">4</button><button class="key-btn" data-key="5" onclick="_0x9b8a('5')">5</button><button class="key-btn" data-key="6" onclick="_0x9b8a('6')">6</button>
-                <button id="clr-btn" class="btn-clr" onclick="_0x7c3d('CLR')">CLR</button>
-                <button class="key-btn" data-key="1" onclick="_0x9b8a('1')">1</button><button class="key-btn" data-key="2" onclick="_0x9b8a('2')">2</button><button class="key-btn" data-key="3" onclick="_0x9b8a('3')">3</button>
-                <button id="ent-btn" class="btn-ent" onclick="_0x7c3d('ENT')">ENT</button>
-                <button id="zero-btn" data-key="0" style="grid-column: span 3" onclick="_0x9b8a('0')">0</button>
+            <div id="left-panel-content" style="display:contents;">
+                <div class="status" id="status">준비 완료</div>
+                <div id="log-window"></div>
+                <div class="input-view" id="display">----</div>
+                <div class="keypad" id="main-keypad">
+                    <button class="key-btn" data-key="7" onclick="_0x9b8a('7')">7</button><button class="key-btn" data-key="8" onclick="_0x9b8a('8')">8</button><button class="key-btn" data-key="9" onclick="_0x9b8a('9')">9</button>
+                    <button id="obs-btn" class="btn-obs" onclick="_0x2f1e()">OBS</button>
+                    <button class="key-btn" data-key="4" onclick="_0x9b8a('4')">4</button><button class="key-btn" data-key="5" onclick="_0x9b8a('5')">5</button><button class="key-btn" data-key="6" onclick="_0x9b8a('6')">6</button>
+                    <button id="clr-btn" class="btn-clr" onclick="_0x7c3d('CLR')">CLR</button>
+                    <button class="key-btn" data-key="1" onclick="_0x9b8a('1')">1</button><button class="key-btn" data-key="2" onclick="_0x9b8a('2')">2</button><button class="key-btn" data-key="3" onclick="_0x9b8a('3')">3</button>
+                    <button id="ent-btn" class="btn-ent" onclick="_0x7c3d('ENT')">ENT</button>
+                    <button id="zero-btn" data-key="0" style="grid-column: span 3" onclick="_0x9b8a('0')">0</button>
+                </div>
             </div>
+            <div id="paradox-msg-box"></div>
         </div>
 
         <div id="info-panel">
@@ -365,8 +382,8 @@
                     <div id="chance-val" class="chance-value">--.--%</div>
                 </div>
                 <div class="prob-cat-container">
-                    <div id="turn-counter">6</div>
-                    <img id="prob-cat-img" src="귀여운고양이도트4.jpg" class="prob-cat">
+                    <div id="turn-counter">7</div>
+                    <img id="prob-cat-img" src="Neon cat.gif" class="prob-cat">
                 </div>
             </div>
             <div id="candidates-box">
@@ -383,7 +400,7 @@
     <div id="obs-input-container" class="panel-center">
         <h2 style="font-family: 'Bebas Neue', cursive; color:var(--purple); font-size:7vh; margin-bottom:0; letter-spacing:0.5vh;">Observation</h2>
         <p style="color:var(--purple); font-size:2vh;"><b>양자고양이의 좌표를 관측하세요!</b></p>
-        <input type="tel" id="obs-num" maxlength="3" autocomplete="off"
+        <input type="tel" id="obs-num" maxlength="4" autocomplete="off"
                oninput="this.value = this.value.replace(/[^0-9]/g, '');"
                style="background:#000; color:#fff; font-family: 'Orbitron', sans-serif; font-size: 5vh; text-align:center; width:35vh; margin:4vh 0; border:0.3vh solid var(--purple); border-radius:1.5vh; letter-spacing:1.5vh; text-shadow: 0 0 1vh var(--purple);">
         <button onclick="_0x6f5a()" style="padding:1.5vh 8vh; background:var(--purple); color:#fff; font-weight:bold; font-size:4vh; border-radius:1.5vh; letter-spacing:0.2vh;">관측 실행</button>
@@ -399,7 +416,7 @@
 
     const firebaseConfig = { apiKey: "AIzaSyCvxUeqc28cRZ8RL4jpAwtakMxRo5d6zbU", authDomain: "aviewpro.firebaseapp.com", databaseURL: "https://aviewpro-default-rtdb.asia-southeast1.firebasedatabase.app", projectId: "aviewpro", storageBucket: "aviewpro.firebasestorage.app", messagingSenderId: "592622610945", appId: "1:592622610945:web:7d56b09e966a4faac62e00", measurementId: "G-NZQ5ZFXG2F" };
 
-    let _0xaiCandidates = [], _0xhistory = [], _0xinputStr = "", _0xturnCount = 6;
+    let _0xaiCandidates = [], _0xhistory = [], _0xinputStr = "", _0xturnCount = 7;
     let _0xisTutorial = false, _0xtutorialStep = 0, _0xcurrentTipType = "";
     let _0xparadoxMusicTriggered = false, _0xalarmTriggered = false, _0xzeroOverlayTriggered = false;
     let _0xcurrentVolume = 0.15;
@@ -407,7 +424,8 @@
     let _0xsuccessLoopInterval = null; 
     let _0xmeowLoopInterval = null; 
     let _0xmeowCount = 0; 
-    
+    let _0xgameStartCounter = 0; // 게임 시작 카운터 추가
+
     let _0xbgm = new Audio("002. ErikMMusic - The Dusty Attic.mp3");
     _0xbgm.loop = true;
     _0xbgm.playbackRate = 2.0;
@@ -433,7 +451,7 @@
             _0xbgm.volume = _0xcurrentVolume; 
         }
         _0xmeowSfx.volume = Math.min(1.0, _0xcurrentVolume * 1.17); 
-        _0xemergencySfx.volume = Math.min(1.0, _0xcurrentVolume * 2.56);
+        _0xemergencySfx.volume = Math.min(1.0, _0xcurrentVolume * 2.56); 
         _0xfailSfx.volume = Math.min(1.0, _0xcurrentVolume * 3.0); 
         _0xsuccessSfx.volume = _0xcurrentVolume;
         _0xspecialClickSfx.volume = Math.min(1.0, _0xcurrentVolume * 3.0);
@@ -487,6 +505,7 @@
 
     function _0x4c5b() {
         _0xplayClick();
+        _0xgameStartCounter++; // Start 클릭 시 카운터 증가
         if(_0xfailLoopInterval) { clearInterval(_0xfailLoopInterval); _0xfailLoopInterval = null; }
         if(_0xsuccessLoopInterval) { clearInterval(_0xsuccessLoopInterval); _0xsuccessLoopInterval = null; }
         if(_0xmeowLoopInterval) { clearInterval(_0xmeowLoopInterval); _0xmeowLoopInterval = null; }
@@ -498,18 +517,19 @@
     }
 
     function _0xresGm() {
-        _0xaiCandidates = []; _0xhistory = []; _0xinputStr = ""; _0xturnCount = 6; _0xmeowCount = 0;
+        _0xaiCandidates = []; _0xhistory = []; _0xinputStr = ""; _0xturnCount = 7; _0xmeowCount = 0;
         _0xparadoxMusicTriggered = false; _0xalarmTriggered = false; _0xzeroOverlayTriggered = false;
         if(_0xpoisonInterval) { clearInterval(_0xpoisonInterval); _0xpoisonInterval = null; }
-        for(let i=0; i<=999; i++){
-            let n = i.toString().padStart(3, '0');
-            if(new Set(n).size === 3) _0xaiCandidates.push(n);
+        for(let i=0; i<=9999; i++){
+            let n = i.toString().padStart(4, '0');
+            if(new Set(n).size === 4) _0xaiCandidates.push(n);
         }
         _0xupUI();
     }
 
     function _0xresDir() {
         _0xplayClick();
+        _0xgameStartCounter++; // Restart 클릭 시 카운터 증가
         if(_0xfailLoopInterval) { clearInterval(_0xfailLoopInterval); _0xfailLoopInterval = null; }
         if(_0xsuccessLoopInterval) { clearInterval(_0xsuccessLoopInterval); _0xsuccessLoopInterval = null; }
         if(_0xmeowLoopInterval) { clearInterval(_0xmeowLoopInterval); _0xmeowLoopInterval = null; }
@@ -517,15 +537,22 @@
         _0xbgm = new Audio("002. ErikMMusic - The Dusty Attic.mp3");
         _0xbgm.loop = true;
         _0xbgm.playbackRate = 2.0;
+        
+        // 카운터 값을 보존하기 위해 body를 직접 갈아끼우지 않고 UI 요소만 초기화
+        const oldCounter = _0xgameStartCounter;
         document.body.innerHTML = _0xoriginalBodyContent;
+        _0xgameStartCounter = oldCounter; 
+        
         _0x3f2a(document.getElementById('volume-slider')?.value || 0.15);
         _0x4c5b();
+        _0xgameStartCounter--; // 4c5b에서 중복 증가 방지
     }
 
     function _0x1d2e() {
         if(!_0xtextData) return;
         _0xisTutorial = true; _0xcurrentTipType = ""; _0xtutorialStep = 1;
         _0x4c5b();
+        _0xgameStartCounter--; // 튜토리얼 진입 시 카운트 제외
         document.getElementById('obs-btn').disabled = true;
         document.getElementById('tutorial-overlay').style.display = 'flex';
         _0xappTut();
@@ -635,7 +662,6 @@
         if (document.getElementById('obs-overlay')?.style.display === 'flex') {
             if (e.key === 'Enter') _0x6f5a(); return;
         }
-        
         if (e.key === 'Enter') {
             e.preventDefault();
             if (document.getElementById('game-box').style.display === 'flex') {
@@ -643,14 +669,12 @@
             }
             return;
         }
-        
         if (e.key >= '0' && e.key <= '9') {
             const btn = document.querySelector(e.key === '0' ? '#zero-btn' : `.key-btn[data-key="${e.key}"]`);
             if(btn) { btn.classList.add('active'); setTimeout(() => btn.classList.remove('active'), 100); }
             _0x9b8a(e.key);
             return;
         }
-        
         if (e.key === 'Delete' || e.key === 'Backspace') {
             _0x7c3d('CLR');
             return;
@@ -659,19 +683,19 @@
 
     function _0x9b8a(n) { 
         _0xplayClick(); 
-        if(_0xinputStr.length < 3 && !_0xinputStr.includes(n)) { 
+        if(_0xinputStr.length < 4 && !_0xinputStr.includes(n)) { 
             _0xinputStr += n; 
             document.getElementById('display').innerText = _0xinputStr; 
-            if (_0xisTutorial && _0xtutorialStep === 1 && _0xinputStr.length === 3) {
+            if (_0xisTutorial && _0xtutorialStep === 1 && _0xinputStr.length === 4) {
                 setTimeout(() => { _0xtutorialStep = 2; document.getElementById('tutorial-overlay').style.display = 'flex'; _0xappTut(); }, 300);
             }
         } 
     }
 
-    function _0xclrIn(isSpecial) { if(!isSpecial) _0xplayClick(); _0xinputStr = ""; document.getElementById('display').innerText = "---"; }
+    function _0xclrIn(isSpecial) { if(!isSpecial) _0xplayClick(); _0xinputStr = ""; document.getElementById('display').innerText = "----"; }
     
     function _0xentCli(isSpecial) {
-        if(_0xinputStr.length === 3 && _0xturnCount > 0) {
+        if(_0xinputStr.length === 4 && _0xturnCount > 0) {
             if(!isSpecial) _0xplayClick();
             const res = _0xaiRes(_0xinputStr);
             _0xhistory.push({ n: _0xinputStr, s: res.s, b: res.b });
@@ -686,19 +710,19 @@
         const outcomes = {};
         _0xaiCandidates.forEach(cand => {
             let s=0, b=0;
-            for(let i=0; i<3; i++){ if(guess[i] === cand[i]) s++; else if(cand.includes(guess[i])) b++; }
+            for(let i=0; i<4; i++){ if(guess[i] === cand[i]) s++; else if(cand.includes(guess[i])) b++; }
             const key = `${s}S${b}B`;
             if(!outcomes[key]) outcomes[key] = [];
             outcomes[key].push(cand);
         });
         let bestKey = ""; let maxCount = -1;
         for(let key in outcomes) {
-            if(key === "3S0B") continue; 
+            if(key === "4S0B") continue; 
             if(outcomes[key].length > maxCount) { maxCount = outcomes[key].length; bestKey = key; }
         }
         if(!bestKey || _0xaiCandidates.length <= 1) {
-            const fakeS = Math.floor(Math.random() * 2);
-            const fakeB = Math.floor(Math.random() * 2);
+            const fakeS = Math.floor(Math.random() * 3);
+            const fakeB = Math.floor(Math.random() * 3);
             bestKey = `${fakeS}S${fakeB}B`;
             _0xaiCandidates = _0xaiCandidates.filter(c => c !== guess); 
         } else { _0xaiCandidates = outcomes[bestKey]; }
@@ -708,7 +732,7 @@
 
     function _0xstPsL() {
         if(_0xpoisonInterval) return;
-        const targetText = "Cat is Poisoned in the Box";
+        const targetText = "Your Training Accomplished"; // 문구 변경
         const el = document.getElementById('chance-val');
         let index = targetText.length;
         let isDeleting = true;
@@ -739,6 +763,12 @@
         const paradoxOverlay = document.getElementById('paradox-cat-overlay');
         
         if(_0xaiCandidates.length === 0) {
+            // 왼쪽 패널 처리 (판정 결과 지우고 횟수 표시)
+            document.getElementById('left-panel-content').style.display = 'none';
+            const paradoxBox = document.getElementById('paradox-msg-box');
+            paradoxBox.style.display = 'flex';
+            paradoxBox.innerText = `${_0xgameStartCounter}회만에 훈련을 통과하셨습니다`;
+
             if(!_0xparadoxMusicTriggered) {
                 _0xbgm.pause();
                 setTimeout(() => {
@@ -752,22 +782,18 @@
             if(!_0xzeroOverlayTriggered) {
                 _0xlightsOffSfx.currentTime = 0;
                 _0xlightsOffSfx.play().catch(e=>{});
-
                 flashOverlay.style.transition = 'none';
                 flashOverlay.style.background = '#000';
                 flashOverlay.style.opacity = '1';
-                
                 setTimeout(() => { 
                     flashOverlay.style.transition = 'opacity 1.5s ease';
                     flashOverlay.style.opacity = '0'; 
                 }, 3000);
-                
                 if(paradoxOverlay) {
                     paradoxOverlay.style.display = 'block';
                     paradoxOverlay.style.opacity = '1';
                     paradoxOverlay.style.animation = "fadeOutLong 16s forwards";
                 }
-
                 _0xzeroOverlayTriggered = true;
                 _0xstPsL();
             }
@@ -777,6 +803,9 @@
             turnCounter.style.color = 'var(--green)'; turnCounter.style.textShadow = '0 0 2vh var(--green)';
             deadX.style.display = 'block'; 
         } else {
+            document.getElementById('left-panel-content').style.display = 'contents';
+            document.getElementById('paradox-msg-box').style.display = 'none';
+            
             deadX.style.display = 'none';
             if(paradoxOverlay) { paradoxOverlay.style.display = 'none'; paradoxOverlay.style.animation = 'none'; }
             if(_0xpoisonInterval) { clearInterval(_0xpoisonInterval); _0xpoisonInterval = null; }
@@ -800,16 +829,14 @@
                 currentShadow = '0 0 2.5vh var(--cyan)';
                 _0xalarmTriggered = false;
             } else {
-                _0alarmTriggered = false;
+                _0xalarmTriggered = false;
             }
 
             chanceValEl.style.color = currentColor;
             chanceValEl.style.textShadow = currentShadow;
-            
             chanceTitleEl.style.display = 'block';
             chanceTitleEl.style.color = currentColor;
             chanceTitleEl.style.textShadow = currentShadow;
-            
             chanceValEl.innerText = prob.toFixed(2) + "%";
             chanceBoxEl.style.borderColor = currentColor;
             turnCounter.style.color = currentColor;
@@ -827,17 +854,11 @@
         document.getElementById('log-window').scrollTop = document.getElementById('log-window').scrollHeight;
 
         const slice = [..._0xaiCandidates].sort(() => 0.5 - Math.random()).slice(0, 100);
-        
         let pixelateStrength = 0;
-        if (prob >= 25) {
-            pixelateStrength = 0; 
-        } else if (prob >= 5) {
-            pixelateStrength = 0.05; 
-        } else if (prob >= 1) {
-            pixelateStrength = 0.15; 
-        } else {
-            pixelateStrength = 0.25; 
-        }
+        if (prob >= 25) pixelateStrength = 0; 
+        else if (prob >= 5) pixelateStrength = 0.05; 
+        else if (prob >= 1) pixelateStrength = 0.15; 
+        else pixelateStrength = 0.25; 
 
         document.getElementById('cand-list').innerHTML = slice.map(c => `<div class="cand-item" style="filter: blur(${pixelateStrength}vh) contrast(180%);">${c}</div>`).join('');
 
@@ -860,7 +881,7 @@
         const field = document.getElementById('quantum-field');
         field.innerHTML = "";
         const neons = ['var(--cyan)', 'var(--purple)', 'var(--green)', 'var(--red)'];
-        const list = _0xaiCandidates.length > 0 ? _0xaiCandidates : ["ERR", "VOID", "000"];
+        const list = _0xaiCandidates.length > 0 ? _0xaiCandidates : ["ERROR", "VOID", "0000"];
         list.slice(0, 80).forEach(num => {
             const span = document.createElement('span');
             span.className = 'bg-candidate';
@@ -891,7 +912,6 @@
                     clearInterval(_0xmeowLoopInterval);
                 }
             }, 6000);
-
             const ed = _0xtextData.endings.paradox;
             _0xrnEG(ed.type, ed.result, ed.message, 'var(--green)', true, true);
             return;
@@ -903,7 +923,7 @@
 
     function _0x6f5a() {
         const guess = document.getElementById('obs-num').value;
-        if(guess.length === 3) {
+        if(guess.length === 4) {
             _0xplayClick();
             let realSecret = _0xaiCandidates[Math.floor(Math.random() * _0xaiCandidates.length)];
             if(guess === realSecret) {
@@ -913,7 +933,6 @@
                     _0xsuccessSfx.currentTime = 0;
                     _0xsuccessSfx.play().catch(e=>{});
                 }, 6000);
-                
                 const ed = _0xtextData.endings.win;
                 _0xrnEG(ed.type, ed.result, ed.message, 'var(--cyan)', true, false);
             } else {
@@ -923,7 +942,6 @@
                     _0xfailSfx.currentTime = 0;
                     _0xfailSfx.play().catch(e=>{});
                 }, 6000);
-                
                 const ed = _0xtextData.endings.lose;
                 _0xrnEG(ed.type, ed.result, ed.message, 'var(--red)', false, false);
             }
@@ -949,7 +967,7 @@
 
         let subButtons = "";
         if (isParadox) {
-            subButtons = `<button onclick="window.open('https://aviewpro.github.io/schrodinger-baseball/', '_blank')" style="font-family: 'Bebas Neue', cursive; width:65vh; padding:2vh 0; margin-top:5vh; background:#222; color:${color}; border:0.4vh solid ${color}; cursor:pointer; font-size:5vh; border-radius:2vh; font-weight:bold; box-shadow: 0 0 2vh ${color}; z-index:100; letter-spacing:0.3vh;">실전에 도전하기</button>`;
+            subButtons = `<button onclick="window.showCredits()" style="font-family: 'Bebas Neue', cursive; width:65vh; padding:2vh 0; margin-top:5vh; background:#222; color:${color}; border:0.4vh solid ${color}; cursor:pointer; font-size:5vh; border-radius:2vh; font-weight:bold; box-shadow: 0 0 2vh ${color}; z-index:100; letter-spacing:0.3vh;">Credits</button>`;
         } else {
             const tipType = isWin ? 'success' : 'fail';
             subButtons = `
@@ -963,7 +981,7 @@
         }
 
         document.body.innerHTML = `
-            <div id="version-tag">0.5 Version</div>
+            <div id="version-tag">1.3 Version</div>
             ${emojiLanes}
             <div id="sound-control" style="z-index:20000;">
                 <span class="sound-icon">♪</span>
@@ -1008,9 +1026,7 @@
         const overlay = document.getElementById('credit-overlay');
         const content = document.getElementById('credit-content');
         if (!overlay || !content) return;
-        
         const text = _0xtextData.dev_story.join("\n");
-        
         content.innerHTML = `
             <div>${text}</div>
             <img src="귀여운고양이.jpg" onclick="_0xplayNyaBgm()" style="width:67.5vh; height:auto; margin-top:5vh; border-radius:2vh; border:0.4vh solid var(--green); box-shadow: 0 0 2vh var(--green); cursor:pointer;">
@@ -1019,14 +1035,11 @@
         overlay.style.display = 'flex';
         _0xcrdY = window.innerHeight * 0.1;
         _0xcrdSpd = 0.55;
-        
         if (_0xcrdScrInt) clearInterval(_0xcrdScrInt);
         _0xcrdScrInt = setInterval(() => {
             _0xcrdY -= _0xcrdSpd;
             content.style.transform = `translateY(${_0xcrdY}px)`;
-            if (_0xcrdY < -(content.scrollHeight + 25)) {
-                clearInterval(_0xcrdScrInt);
-            }
+            if (_0xcrdY < -(content.scrollHeight + 25)) clearInterval(_0xcrdScrInt);
         }, 16);
     };
 
@@ -1048,7 +1061,7 @@
         const turnCounter = document.getElementById('turn-counter');
         if(turnCounter) {
             if (_0xturnCount > 0) {
-                const intensity = 15; 
+                const intensity = 25; 
                 const tMoveX = (Math.random()-0.5) * intensity;
                 const tMoveY = (Math.random()-0.5) * intensity;
                 turnCounter.style.transform = `translate(${tMoveX}px, ${tMoveY}px)`;
