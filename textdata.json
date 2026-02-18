@@ -1,6 +1,5 @@
 {
-  "dev_story": [ 
-  ],
+  "dev_story": [],
   "endings": {
     "paradox": {
       "type": "Training Complete",
@@ -71,7 +70,7 @@
       {
         "step": 3,
         "title": "3. 결과 표시 판넬",
-        "desc": "S는 숫자와 위치가 모두 맞는 숫자의 개수이며<br>B는 숫자는 맞지만 위치는 틀린 숫자의 개수입니다."
+        "desc": "<span style='color:var(--green); font-weight:bold;'>S</span>(strike)는 숫자와 자릿수 위치가 모두 맞는 숫자의 개수이며<br><span style='color:var(--cyan); font-weight:bold;'>B</span>(ball)는 숫자가 포함되지만 자릿수 위치는 틀린 숫자의 개수입니다.<br>예를들어 1<span style='color:var(--cyan); font-weight:bold;'>2</span><span style='color:var(--green); font-weight:bold;'>3</span>측정했는데 고양이가 있는 좌표가 <span style='color:var(--cyan); font-weight:bold;'>2</span>0<span style='color:var(--green); font-weight:bold;'>3</span>이라면 <span style='color:var(--green); font-weight:bold;'>1S</span>0<span style='color:var(--cyan); font-weight:bold;'>1B</span>가 됩니다."
       },
       {
         "step": 4,
