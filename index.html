@@ -17,6 +17,8 @@
         
         html {
             height: 100%;
+            /* 기본 커서를 고양이 발바닥으로 설정 */
+            cursor: url('cursor.png'), auto;
         }
 
         body { 
@@ -34,11 +36,27 @@
             min-height: 100vh;
             margin: 0; 
             padding: 0;
-            /* 텍스트 선택 방지 유지, 스크롤은 허용 */
             user-select: none;
             -webkit-user-select: none;
+            /* 세로 스크롤 허용 설정 추가 */
             overflow-x: hidden;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            /* 기본 커서 설정 */
+            cursor: url('cursor.png'), auto;
+        }
+
+        /* 클릭(액티브) 시 고양이 발바닥 클릭 모양으로 변경 */
+        body:active {
+            cursor: url('cursor_click.png'), auto;
+        }
+
+        /* 버튼 및 클릭 가능한 요소에도 커서 적용 */
+        button, a, input, [onclick] {
+            cursor: url('cursor.png'), pointer !important;
+        }
+        button:active, a:active, input:active, [onclick]:active {
+            cursor: url('cursor_click.png'), pointer !important;
         }
 
         /* 터치 반응성 및 하이라이트 제거 */
@@ -78,10 +96,9 @@
         }
         
         #sound-control { position: fixed; right: 2vh; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; gap: 1vh; background: rgba(0,0,0,0.7); padding: 1.5vh 1vh; border-radius: 3vh; border: 0.1vh solid var(--cyan); z-index: 10000; }
-        #sound-control input[type=range] { -webkit-appearance: slider-vertical; width: 0.8vh; height: 15vh; cursor: pointer; }
+        #sound-control input[type=range] { -webkit-appearance: slider-vertical; width: 0.8vh; height: 15vh; cursor: inherit; }
         .sound-icon { font-size: 1.5vh; color: var(--cyan); }
 
-        /* 모바일에서 음량 조절바 숨기기 */
         @media screen and (max-width: 768px) {
             #sound-control { display: none !important; }
         }
@@ -124,18 +141,17 @@
         .setup-box-container { position: relative; width: 35vh; margin-bottom: 2vh; }
         .setup-cat { width: 35vh; height: 35vh; border-radius: 4vh; border: 0.4vh solid var(--green); object-fit: cover; animation: neonShift 10s infinite alternate linear; display: block; }
         
-        .setup-btn { font-family: 'Bebas Neue', cursive; width: 35vh; color: #000; font-weight: 900; height: 7vh; font-size: 3.2vh; border-radius: 1.5vh; cursor: pointer; border: none; animation: neonShiftBg 10s infinite alternate linear; margin-top: 1vh; transition: transform 0.1s, filter 0.2s; letter-spacing: 0.1vh; }
+        .setup-btn { font-family: 'Bebas Neue', cursive; width: 35vh; color: #000; font-weight: 900; height: 7vh; font-size: 3.2vh; border-radius: 1.5vh; border: none; animation: neonShiftBg 10s infinite alternate linear; margin-top: 1vh; transition: transform 0.1s, filter 0.2s; letter-spacing: 0.1vh; }
         .setup-btn:hover { transform: scale(1.02); filter: brightness(1.2); }
         .setup-btn:active { transform: scale(0.98); }
-        .setup-btn:disabled { opacity: 0.3; cursor: not-allowed; animation: none; background: #444; color: #888; box-shadow: none; }
+        .setup-btn:disabled { opacity: 0.3; cursor: not-allowed !important; animation: none; background: #444; color: #888; box-shadow: none; }
 
-        .tutorial-btn { font-family: 'Bebas Neue', cursive; width: 35vh; background: #444; color: #fff; font-weight: 700; height: 5vh; font-size: 2.5vh; border-radius: 1.5vh; cursor: pointer; border: 0.2vh solid #666; margin-bottom: 1vh; transition: 0.2s; letter-spacing: 0.1vh; }
+        .tutorial-btn { font-family: 'Bebas Neue', cursive; width: 35vh; background: #444; color: #fff; font-weight: 700; height: 5vh; font-size: 2.5vh; border-radius: 1.5vh; border: 0.2vh solid #666; margin-bottom: 1vh; transition: 0.2s; letter-spacing: 0.1vh; }
         .tutorial-btn:hover { background: #555; transform: scale(1.02); }
         .tutorial-btn:active { transform: scale(0.98); }
 
         .new-keyhole { width: 35vh; height: auto; margin-top: 1.5vh; animation: keyholeNeonShift 10s infinite alternate linear; }
 
-        /* 게임 패널 레이아웃 수정 */
         .panels-wrapper {
             display: flex;
             flex-wrap: wrap;
@@ -146,7 +162,7 @@
 
         #game-box, #info-panel { 
             width: 50vh; 
-            height: 75vh; /* 고정 세로폭 유지 */
+            height: 75vh; 
             padding: 2.5vh; 
             border-radius: 2.5vh; 
             box-sizing: border-box; 
@@ -220,10 +236,10 @@
 
         .keypad { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1vh; flex-grow: 1; }
         .key-btn, #zero-btn, #obs-btn, #clr-btn, #ent-btn { height: 100%; min-height: 5vh; }
-        button { background: #222; border: none; color: #fff; padding: 1vh 0; border-radius: 1vh; cursor: pointer; font-size: 2.4vh; box-shadow: 0.2vh 0.2vh 0.5vh rgba(0,0,0,0.5); transition: background 0.2s, transform 0.1s, filter 0.2s; }
+        button { background: #222; border: none; color: #fff; padding: 1vh 0; border-radius: 1vh; font-size: 2.4vh; box-shadow: 0.2vh 0.2vh 0.5vh rgba(0,0,0,0.5); transition: background 0.2s, transform 0.1s, filter 0.2s; }
         button:hover:not(:disabled) { filter: brightness(1.3); transform: translateY(-0.2vh); }
         button:active:not(:disabled), button.active { transform: translateY(0.2vh); filter: brightness(0.8); }
-        button:disabled { opacity: 0.1; cursor: not-allowed; }
+        button:disabled { opacity: 0.1; cursor: not-allowed !important; }
         
         .btn-clr { font-family: 'Bebas Neue', cursive; background: var(--cyan) !important; color: #000 !important; font-weight: bold; border: 0.2vh solid rgba(255,255,255,0.4); box-shadow: inset 0 0 1vh rgba(255,255,255,0.5), 0 0 1.5vh var(--cyan); font-size: 2.5vh !important; }
         .btn-obs { font-family: 'Bebas Neue', cursive; background: var(--purple); color: #000; font-weight: bold; border: 0.2vh solid rgba(255,255,255,0.2); box-shadow: inset 0 0 1.5vh rgba(0,0,0,0.5), 0 0 1.5vh var(--purple); font-size: 2.5vh !important; }
@@ -265,7 +281,7 @@
         .tutorial-msg-box h3 { color: #ccc; font-size: 2.5vh; margin-top: 0; margin-bottom: 0; }
         .tutorial-msg-box p { font-size: 1.8vh; color: #ddd; line-height: 1.6; margin: 0.2vh 0 0.75vh 0; }
         .tutorial-msg-box .esc-guide { font-size: 1.2vh; color: #888; margin-top: 1.5vh; }
-        .tutorial-msg-box button { background: #444; color: #fff; padding: 1vh 3vh; border: 0.1vh solid #666; border-radius: 1vh; font-weight: bold; cursor: pointer; }
+        .tutorial-msg-box button { background: #444; color: #fff; padding: 1vh 3vh; border: 0.1vh solid #666; border-radius: 1vh; font-weight: bold; }
         .tutorial-msg-box button:hover { background: #555; }
         
         .tutorial-msg-box button.btn-cyan { background: var(--cyan); color: #000; border: none; box-shadow: 0 0 1.5vh var(--cyan); }
@@ -298,7 +314,6 @@
             opacity: 1; box-shadow: 0 1vh 3vh rgba(0,0,0,0.8), 0 0 2vh rgba(255,255,255,0.3);
             transform: translateZ(50px);
             animation: floatingCat 4s infinite ease-in-out;
-            cursor: pointer;
             pointer-events: auto;
         }
         
@@ -366,14 +381,13 @@
 
         @media screen and (max-width: 768px) {
             #setup { width: 90vw; }
-            /* 모바일에서 무조건 세로 배치 및 고정 높이 유지 */
             .panels-wrapper {
                 flex-direction: column !important;
                 align-items: center !important;
             }
             #game-box, #info-panel { 
                 width: 90vw !important; 
-                height: 75vh !important; /* 고정 세로폭 유지 */
+                height: 75vh !important; 
                 flex-shrink: 0;
             }
             .setup-cat, .setup-btn, .tutorial-btn, .setup-box-container { width: 80vw; }
@@ -488,9 +502,7 @@
         return false;
     };
 
-    document.addEventListener('touchmove', function(e) {
-        if (e.scale !== 1) { e.preventDefault(); }
-    }, { passive: false });
+    // 모바일 스크롤 차단 로직 제거됨
 
     let _0vTData = null;
     fetch('textdata.json')
@@ -1088,15 +1100,15 @@
 
         let subButtons = "";
         if (isParadox) {
-            subButtons = `<button onclick="window.open('https://aviewpro.github.io/schrodinger-baseball/', '_blank')" style="font-family: 'Bebas Neue', cursive; width:65vh; padding:2vh 0; margin-top:5vh; background:#222; color:${color}; border:0.4vh solid ${color}; cursor:pointer; font-size:5vh; border-radius:2vh; font-weight:bold; box-shadow: 0 0 2vh ${color}; z-index:100; letter-spacing:0.3vh;">실전에 도전하기</button>`;
+            subButtons = `<button onclick="window.open('https://aviewpro.github.io/schrodinger-baseball/', '_blank')" style="font-family: 'Bebas Neue', cursive; width:65vh; padding:2vh 0; margin-top:5vh; background:#222; color:${color}; border:0.4vh solid ${color}; font-size:5vh; border-radius:2vh; font-weight:bold; box-shadow: 0 0 2vh ${color}; z-index:100; letter-spacing:0.3vh;">실전에 도전하기</button>`;
         } else {
             const tipType = isWin ? 'success' : 'fail';
             subButtons = `
                 <div style="display:flex; flex-direction:column; gap: 2vh; align-items: center; margin-top:4vh; width: 62vh; z-index:100;">
-                    <button onclick="window.showTips('${tipType}')" style="font-family: 'Bebas Neue', cursive; width:100%; padding:1.2vh 0; background:#333; color:${color}; border:0.2vh solid ${color}; cursor:pointer; font-size:4vh; border-radius:1.5vh; font-weight:bold; letter-spacing:0.2vh;">TIPS</button>
+                    <button onclick="window.showTips('${tipType}')" style="font-family: 'Bebas Neue', cursive; width:100%; padding:1.2vh 0; background:#333; color:${color}; border:0.2vh solid ${color}; font-size:4vh; border-radius:1.5vh; font-weight:bold; letter-spacing:0.2vh;">TIPS</button>
                     <div style="display:flex; gap: 2.5vh; width: 100%;">
-                        <button onclick="location.reload()" style="font-family: 'Bebas Neue', cursive; flex:1; padding:1.2vh 0; background:#222; color:#fff; border:0.2vh solid #444; cursor:pointer; font-size:3.2vh; border-radius:1.5vh; letter-spacing:0.1vh;">Main Menu</button>
-                        <button id="restart-game-btn" onclick="_0vResDir()" style="font-family: 'Bebas Neue', cursive; flex:2; padding:1.2vh 0; background:#222; color:#fff; border:0.2vh solid ${color}; cursor:pointer; font-size:3.2vh; border-radius:1.5vh; letter-spacing:0.1vh;">Restart</button>
+                        <button onclick="location.reload()" style="font-family: 'Bebas Neue', cursive; flex:1; padding:1.2vh 0; background:#222; color:#fff; border:0.2vh solid #444; font-size:3.2vh; border-radius:1.5vh; letter-spacing:0.1vh;">Main Menu</button>
+                        <button id="restart-game-btn" onclick="_0vResDir()" style="font-family: 'Bebas Neue', cursive; flex:2; padding:1.2vh 0; background:#222; color:#fff; border:0.2vh solid ${color}; font-size:3.2vh; border-radius:1.5vh; letter-spacing:0.1vh;">Restart</button>
                     </div>
                 </div>`;
         }
@@ -1147,7 +1159,7 @@
         const content = document.getElementById('credit-content');
         if (!overlay || !content) return;
         const text = _0vTData.dev_story.join("\n");
-        content.innerHTML = `<div>${text}</div><img src="귀여운고양이.jpg" onclick="_0vNya()" style="width:67.5vh; height:auto; margin-top:5vh; border-radius:2vh; border:0.4vh solid var(--green); box-shadow: 0 0 2vh var(--green); cursor:pointer;"><img src="Aview.png" class="credit-logo">`;
+        content.innerHTML = `<div>${text}</div><img src="귀여운고양이.jpg" onclick="_0vNya()" style="width:67.5vh; height:auto; margin-top:5vh; border-radius:2vh; border:0.4vh solid var(--green); box-shadow: 0 0 2vh var(--green);"><img src="Aview.png" class="credit-logo">`;
         overlay.style.display = 'flex';
         _0vCrY = window.innerHeight * 0.1;
         _0vCrSpd = 0.55;
