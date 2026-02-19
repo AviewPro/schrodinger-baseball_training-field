@@ -1040,14 +1040,10 @@
         if(_0vHist.length < 4) return;
         _0vPlayS();
         if(_0vAiC.length === 0) {
-            _0vMCnt = 0; 
+            // 패러독스 상황: 효과음을 반복 없이 1회만 재생하도록 수정
+            _0vMSfx.currentTime = 0;
             _0vMSfx.play().catch(e=>{}); 
-            _0vMCnt++;
-            if(_0vMInt) clearInterval(_0vMInt);
-            _0vMInt = setInterval(() => {
-                if(_0vMCnt < 10) { _0vMSfx.currentTime = 0; _0vMSfx.play().catch(e=>{}); _0vMCnt++; } 
-                else { clearInterval(_0vMInt); }
-            }, 6000);
+
             const ed = _0vTData.endings.paradox;
             _0vRendE(ed.type, ed.result, ed.message, 'var(--green)', true, true);
             return;
