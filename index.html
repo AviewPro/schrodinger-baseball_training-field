@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Schrödinger Baseball - Single Mode</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
     <link rel="icon" type="image/jpeg" href="귀여운고양이도트4.jpg">
     <link rel="shortcut icon" href="귀여운고양이도트4.jpg">
     
@@ -32,8 +34,21 @@
             min-height: 100vh;
             margin: 0; 
             padding: 0;
+            /* 텍스트 선택 방지 유지, 스크롤은 허용 */
             user-select: none;
             -webkit-user-select: none;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        /* 터치 반응성 및 하이라이트 제거 */
+        canvas, button, .game-element {
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        button {
+            touch-action: manipulation;
         }
 
         #version-tag {
@@ -59,11 +74,17 @@
             border-radius: 1vh;
             border: none;
             z-index: 1000;
+            display: none; 
         }
         
         #sound-control { position: fixed; right: 2vh; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; gap: 1vh; background: rgba(0,0,0,0.7); padding: 1.5vh 1vh; border-radius: 3vh; border: 0.1vh solid var(--cyan); z-index: 10000; }
         #sound-control input[type=range] { -webkit-appearance: slider-vertical; width: 0.8vh; height: 15vh; cursor: pointer; }
         .sound-icon { font-size: 1.5vh; color: var(--cyan); }
+
+        /* 모바일에서 음량 조절바 숨기기 */
+        @media screen and (max-width: 768px) {
+            #sound-control { display: none !important; }
+        }
 
         .title-wrapper { position: relative; margin-top: 2vh; margin-bottom: 2vh; z-index: 300; display: flex; flex-direction: column; justify-content: center; align-items: center; flex-shrink: 0; }
         .title-bg { position: absolute; background: rgba(0, 0, 0, 0.7); width: 120%; height: 120%; border-radius: 1.5vh; filter: blur(0.5vh); z-index: -1; }
@@ -114,7 +135,26 @@
 
         .new-keyhole { width: 35vh; height: auto; margin-top: 1.5vh; animation: keyholeNeonShift 10s infinite alternate linear; }
 
-        #game-box, #info-panel { width: 50vh; height: 75vh; padding: 2.5vh; border-radius: 2.5vh; box-sizing: border-box; display: flex; flex-direction: column; flex-shrink: 0; margin-bottom: 3vh; }
+        /* 게임 패널 레이아웃 수정 */
+        .panels-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3vh;
+            justify-content: center;
+            width: 100%;
+        }
+
+        #game-box, #info-panel { 
+            width: 50vh; 
+            height: 75vh; /* 고정 세로폭 유지 */
+            padding: 2.5vh; 
+            border-radius: 2.5vh; 
+            box-sizing: border-box; 
+            display: flex; 
+            flex-direction: column; 
+            flex-shrink: 0; 
+            margin-bottom: 3vh; 
+        }
         #game-box { background: rgba(17, 17, 17, 0.9); border: 0.1vh solid #333; position: relative; display: none; }
         #info-panel { background: rgba(10, 10, 15, 0.9); border: 0.1vh solid #333; display: none; position: relative; }
         
@@ -322,31 +362,30 @@
 
         @media screen and (max-width: 1000px) {
             .title-wrapper { display: none; }
-            #game-box, #info-panel { width: 100vw !important; }
         }
 
         @media screen and (max-width: 768px) {
             #setup { width: 90vw; }
+            /* 모바일에서 무조건 세로 배치 및 고정 높이 유지 */
+            .panels-wrapper {
+                flex-direction: column !important;
+                align-items: center !important;
+            }
             #game-box, #info-panel { 
-                height: auto; 
-                min-height: 80vh; 
+                width: 90vw !important; 
+                height: 75vh !important; /* 고정 세로폭 유지 */
                 flex-shrink: 0;
             }
             .setup-cat, .setup-btn, .tutorial-btn, .setup-box-container { width: 80vw; }
             .header-title { font-size: 4vh; letter-spacing: 0.5vh; }
             .panel-center { width: 90vw; padding: 3vh; }
-            
-            .game-container > div[style*="flex-wrap: wrap"] {
-                flex-direction: column !important;
-                align-items: center !important;
-            }
         }
     </style>
 </head>
 <body oncontextmenu="return false" oncopy="return false" oncut="return false">
 
 <div id="version-tag">0.7 Version</div>
-<div id="how-counter">HOW버튼 카운터: 0</div>
+<div id="how-counter">0</div>
 <div id="flash-overlay"></div>
 
 <div id="sound-control">
@@ -393,7 +432,7 @@
         저작권은 나한테 있나? 잘 모르겠습니다. 그냥 가볍게 즐겨주세요.
     </div>
 
-    <div style="display: flex; flex-wrap: wrap; gap: 3vh; justify-content: center; width: 100%;">
+    <div class="panels-wrapper">
         <div id="game-box">
             <div class="status" id="status">준비 완료</div>
             <div id="log-window"></div>
@@ -443,6 +482,16 @@
 </div>
 
 <script>
+    window.oncontextmenu = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    };
+
+    document.addEventListener('touchmove', function(e) {
+        if (e.scale !== 1) { e.preventDefault(); }
+    }, { passive: false });
+
     let _0vTData = null;
     fetch('textdata.json')
         .then(response => response.json())
@@ -461,7 +510,6 @@
     let _0vMCnt = 0; 
     let _0vPCnt = 0;
     
-    // 로컬 스토리지에서 카운트 불러오기
     let _0vHowCnt = parseInt(localStorage.getItem('sb_how_count')) || 0;
 
     let _0vBgm = new Audio("002. ErikMMusic - The Dusty Attic.mp3");
@@ -481,12 +529,11 @@
     const _0vBodyOri = document.body.innerHTML;
     let _0vPoisInt = null;
 
-    // 초기 상태 반영
     window.onload = function() {
         _0vVol(0.15);
         const counterEl = document.getElementById('how-counter');
         const startBtn = document.getElementById('start-btn');
-        if(counterEl) counterEl.innerText = "HOW버튼 카운터: " + _0vHowCnt;
+        if(counterEl) counterEl.innerText = _0vHowCnt;
         if(startBtn && _0vHowCnt >= 1) startBtn.disabled = false;
     };
 
@@ -590,27 +637,22 @@
         _0vPCnt = oldPlayCount;
         
         _0vVol(document.getElementById('volume-slider')?.value || 0.15);
-        // 상태 복구
         const counterEl = document.getElementById('how-counter');
         const startBtn = document.getElementById('start-btn');
-        if(counterEl) counterEl.innerText = "HOW버튼 카운터: " + _0vHowCnt;
+        if(counterEl) counterEl.innerText = _0vHowCnt;
         if(startBtn && _0vHowCnt >= 1) startBtn.disabled = false;
         _0vStart();
     }
 
     function _0vHTP() {
-        // 카운트 증가 및 로컬 스토리지 저장
         _0vHowCnt++;
         localStorage.setItem('sb_how_count', _0vHowCnt);
-        
         const counterEl = document.getElementById('how-counter');
-        if(counterEl) counterEl.innerText = "HOW버튼 카운터: " + _0vHowCnt;
-        
+        if(counterEl) counterEl.innerText = _0vHowCnt;
         const startBtn = document.getElementById('start-btn');
         if(_0vHowCnt >= 1 && startBtn) {
             startBtn.disabled = false;
         }
-
         if(!_0vTData) return;
         _0vIsTut = true; _0vTType = ""; _0vTStep = 1;
         _0vStart();
